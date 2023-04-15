@@ -18,6 +18,6 @@ public class IndexController {
 
     @GetMapping("/test")
     public @ResponseBody String test(){
-        return "te!!!";
+        return "test!!!";
     }
 }
