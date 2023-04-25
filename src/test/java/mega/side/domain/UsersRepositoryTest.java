@@ -1,4 +1,4 @@
-package mega.side.domain.users;
+package mega.side.domain;
 
 import mega.side.repository.UsersRepository;
 import org.junit.jupiter.api.AfterEach;

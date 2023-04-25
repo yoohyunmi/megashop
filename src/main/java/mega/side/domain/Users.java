@@ -1,4 +1,4 @@
-package mega.side.domain.users;
+package mega.side.domain;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -23,17 +24,31 @@ public class Users {
     private int id;
 
     private String email;
+
     private String password;
+
     private String name;
-    private String passwdTemporlYn;
+
+    private String mobile;
+
+    @Column(name="passwd_temporl_yn")
+    private char passwdTemporlYn;
+
+    @Column(name="passwd_temporl")
     private String passwdTemporl;
-    private String signYmd;
-    private String latestLoginYmd;
+
+    @Column(name="sign_ymd")
+    private LocalDateTime signYmd;
+
+    @Column(name="latest_login_ymd")
+    private LocalDateTime latestLoginYmd;
 
     @Builder
-    public Users(String name, String password, String email) {
-        this.name = name;
-        this.password = password;
+    public Users(String email, String password, String name, String mobile) {
         this.email = email;
+        this.password = password;
+        this.name = name;
+        this.mobile = mobile;
+        this.signYmd = LocalDateTime.now();
     }
 }
