@@ -7,11 +7,19 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
     
-    @GetMapping("/index")
+    @GetMapping(value = {"/","/index"})
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("index");
         
+        return mv;
+    }
+
+    @GetMapping("/account")
+    public ModelAndView accountIndex() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("account-signin");
+
         return mv;
     }
 }
