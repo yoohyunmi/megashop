@@ -7,6 +7,7 @@ create table users(
   passwd_temporl_yn char,
   passwd_temporl varchar(100),
   sign_ymd timestamp,
+  authorization varchar(10),
   latest_login_ymd timestamp,
   primary key ( id )
 );

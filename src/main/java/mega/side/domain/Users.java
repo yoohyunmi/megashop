@@ -40,8 +40,17 @@ public class Users {
     @Column(name="sign_ymd")
     private LocalDateTime signYmd;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name="user_role")
+    private UserRole role;
+
     @Column(name="latest_login_ymd")
     private LocalDateTime latestLoginYmd;
+
+
+    public enum UserRole {
+        ADMIN, USER, GUEST
+    }
 
     @Builder
     public Users(String email, String password, String name, String mobile) {
@@ -50,5 +59,6 @@ public class Users {
         this.name = name;
         this.mobile = mobile;
         this.signYmd = LocalDateTime.now();
+        this.role = UserRole.USER;
     }
 }
