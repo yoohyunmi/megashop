@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class AccountController {
@@ -18,7 +19,7 @@ public class AccountController {
     UsersServiceImpl usersService;
 
     @PostMapping("/signup")
-    public String signup(HttpServletRequest request) {
+    public String signup(HttpServletRequest request, HttpSession session) {
         String firstName = request.getParameter("reg-fn");
         String lastName = request.getParameter("reg-ln");
         String email = request.getParameter("reg-email");
@@ -33,11 +34,20 @@ public class AccountController {
     }
 
     @PostMapping("/loginUser")
-    public @ResponseBody Users loginUser(HttpServletRequest request) {
-        String email = request.getParameter("login-email");
-        String password = request.getParameter("login-password");
+    public ModelAndView loginUser(HttpServletRequest request, HttpSession session) {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-        return usersService.loginUsers(email, password);
+        ModelAndView mv = new ModelAndView();
+        // 1. email 존재 여부확인
+        // 2. password 일치 여부
+        // 3. 세션 등록
+
+        Users loginUser = usersService.loginUsers(email, password);
+        // 4. send redirect
+        mv.addObject("user", loginUser);
+        mv.setViewName("index");
+        return mv;
     }
 
 }
