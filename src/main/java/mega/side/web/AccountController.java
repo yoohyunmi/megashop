@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -38,7 +40,7 @@ public class AccountController {
 
     @PostMapping("/loginUser")
     public ModelAndView loginUser(@RequestParam("email") String email, @RequestParam("password") String password
-                                    , @RequestParam(value="rememberMe", required = false) boolean rememberMe, HttpSession session) {
+                                    , @RequestParam(value="rememberMe", required = false) boolean rememberMe, HttpSession session, HttpServletResponse response) {
 
         ModelAndView mv = new ModelAndView();
 
@@ -56,6 +58,11 @@ public class AccountController {
         // 3. 로그인 유지 여부 -> 쿠키 저장
         if(rememberMe == true) {
             // 쿠키 저장
+            Cookie cookie = new Cookie("user-email", email);
+            cookie.setMaxAge(60*60*24*7);
+            cookie.setPath("/");
+
+            response.addCookie(cookie);
         }
         // 4. 세션 등록
         System.out.println("session id=" + session.getId());
