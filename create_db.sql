@@ -12,3 +12,12 @@ create table users(
   primary key ( id )
 );
 
+create table user_session (
+  session_id varchar(100) not null,
+  email varchar(100) not null,
+  name varchar(50) not null,
+  user_role varchar(10),
+  latest_activity_datetime timestamp,
+  expired_datetime timestamp
+);
+
