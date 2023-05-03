@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.transaction.Transactional;
 
@@ -21,16 +22,21 @@ public class UsersServiceImpl {
                 new RuntimeException("Not Found User"));
     }
 
+    public Users findByEmail(String email) {
+        return usersRepository.findByEmail(email);
+    }
+
     @Transactional
     public void createUser(Users user) {
         usersRepository.save(user);
     }
 
     public Users loginUsers(String email, String password) {
-        Users loginUser = new Users(email, password, null, null);
-        loginUser = usersRepository.loginUser(email, password);
-        loginUser.setLatestLoginYmd(LocalDateTime.now());
+        Users loginUser = usersRepository.loginUser(email, password);
 
+        if(Objects.isNull(loginUser)) {
+            throw new RuntimeException("Wrong Password!!");
+        }
         return loginUser;
     }
 

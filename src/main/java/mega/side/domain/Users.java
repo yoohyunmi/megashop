@@ -49,10 +49,6 @@ public class Users {
     @Column(name="latest_login_ymd")
     private LocalDateTime latestLoginYmd;
 
-    public enum UserRole {
-        ADMIN, USER,
-    }
-
     public void setLatestLoginYmd(LocalDateTime latestLoginYmd) {
         this.latestLoginYmd = latestLoginYmd;
     }

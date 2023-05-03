@@ -8,6 +8,8 @@ public interface UsersService {
 
     Users getUser(int id);
 
+    int findByEmail(String email);
+
     void createUser(Users user);
     
     Users loginUser(String email, String password);

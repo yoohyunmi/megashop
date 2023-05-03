@@ -14,10 +14,10 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
     
     @GetMapping(value = {"/","/index"})
-    public ModelAndView index(Model model) {
+    public ModelAndView index(Model model, HttpServletRequest request, HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("index");
-        System.out.println("&&&&&&&&&&&&&&&&&" + model.getAttribute("user"));
+//        System.out.println("&&&&&&&&&&&&&&&&&" + model.getAttribute("user"));
         return mv;
     }
 
@@ -25,7 +25,6 @@ public class IndexController {
     public ModelAndView accountIndex(@ModelAttribute("user") Users user, HttpServletRequest request, HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("account-signin");
-
 
         return mv;
     }
