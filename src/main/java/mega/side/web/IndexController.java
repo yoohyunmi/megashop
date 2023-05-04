@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
+
+import mega.side.common.util.SessionUtil;
 import mega.side.domain.Users;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,9 @@ public class IndexController {
     
     @GetMapping(value = {"/","/index"})
     public ModelAndView index(Model model, HttpServletRequest request, HttpSession session) {
+        
+        System.out.println("*******************" + session.getAttribute(SessionUtil.SESSION_NAME));
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("index");
 //        System.out.println("&&&&&&&&&&&&&&&&&" + model.getAttribute("user"));

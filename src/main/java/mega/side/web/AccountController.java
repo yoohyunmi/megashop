@@ -1,5 +1,6 @@
 package mega.side.web;
 
+import mega.side.common.util.Encrypt;
 import mega.side.common.util.SessionUtil;
 import mega.side.common.util.UserSession;
 import mega.side.domain.Users;
@@ -31,8 +32,10 @@ public class AccountController {
         String phone = request.getParameter("reg-phone");
         String password = request.getParameter("reg-password");
         String name = firstName.concat(" ").concat(lastName);
+        
+        String encryptedPassword = Encrypt.encryptSHA256(password);
 
-        Users user = new Users(email, password, name, phone);
+        Users user = new Users(email, encryptedPassword, name, phone);
         usersService.createUser(user);
 
         return "redirect:/index";
@@ -50,10 +53,10 @@ public class AccountController {
             throw new RuntimeException("Not Found User!");      /* 추후 Error handler 필요 */
         }
         // 2. password 일치 여부
-        if( !password.equals(loginUser.getPassword()) ){
+        String encryptedPassword = Encrypt.encryptSHA256(password);
+        if( !encryptedPassword.equals(loginUser.getPassword()) ){
             throw new RuntimeException("Wrong password!");
         }
-        /* password 암호화 */
 
         // 3. 로그인 유지 여부 -> 쿠키 저장
         if(rememberMe == true) {
