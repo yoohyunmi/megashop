@@ -110,9 +110,18 @@ public class AccountController {
         return mv;
     }
 
-    @PostMapping("/signout")
-    public void signOut() {
-         
+    @GetMapping("/signout")
+    public ModelAndView signOut(HttpServletRequest request, HttpSession session) {
+         ModelAndView mv = new ModelAndView();
+         if(session.getAttribute(SessionUtil.SESSION_NAME) == null) {
+            mv.setViewName("redirect:/account");
+            return mv;
+         }
+         session.removeAttribute(SessionUtil.SESSION_NAME);
+         session.invalidate();
+
+         mv.setViewName("redirect:/account");
+         return mv;
     }
 
 }
