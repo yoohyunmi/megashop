@@ -34,11 +34,5 @@ public class IndexController {
         return mv;
     }
 
-    @GetMapping("/accountProfile")
-    public ModelAndView accountProfile(HttpServletRequest request, HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("account-profile");
-        return mv;
-    }
 
 }

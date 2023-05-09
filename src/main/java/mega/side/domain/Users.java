@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
@@ -62,4 +61,17 @@ public class Users {
         this.signYmd = LocalDateTime.now();
         this.role = UserRole.USER;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+    
 }

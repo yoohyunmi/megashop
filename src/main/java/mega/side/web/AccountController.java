@@ -79,4 +79,40 @@ public class AccountController {
         return mv;
     }
 
+    @GetMapping("/accountProfile")
+    public ModelAndView accountProfile(HttpServletRequest request, HttpSession session) {
+
+        UserSession userSession = (UserSession)session.getAttribute(SessionUtil.SESSION_NAME);
+        ModelAndView mv = new ModelAndView();
+
+        String email = userSession.getEmail();
+        Users loginUser = usersService.findByEmail(email);
+
+        mv.addObject("user", loginUser);
+        mv.setViewName("account-profile");
+        return mv;
+    }
+
+    @PostMapping("/updateProfile")
+    public ModelAndView updateProfile(@ModelAttribute Users users, @RequestParam("account-pass") String password, @RequestParam("account-confirm-pass") String password_confirm, HttpServletRequest request, HttpSession session) {
+        UserSession userSession = (UserSession)session.getAttribute(SessionUtil.SESSION_NAME);
+        ModelAndView mv = new ModelAndView();
+        String email = userSession.getEmail();
+
+        System.out.println(password+", " + password_confirm);
+        if(!password.equals(password_confirm)) {
+            throw new RuntimeException("Password does not match!");
+        }
+        users.setPassword(password);
+        usersService.updateUser(email, users);
+
+        mv.setViewName("redirect:/accountProfile");
+        return mv;
+    }
+
+    @PostMapping("/signout")
+    public void signOut() {
+         
+    }
+
 }
