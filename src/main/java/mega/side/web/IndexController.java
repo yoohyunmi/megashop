@@ -34,5 +34,12 @@ public class IndexController {
         return mv;
     }
 
+    @GetMapping("/vendorSettings")
+    public ModelAndView vendorSettings(HttpServletRequest request, HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("vendor/dashboard-settings");
+
+        return mv;
+    }
 
 }

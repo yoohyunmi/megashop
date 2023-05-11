@@ -3,6 +3,7 @@ package mega.side.web;
 import mega.side.common.util.Encrypt;
 import mega.side.common.util.SessionUtil;
 import mega.side.common.util.UserSession;
+import mega.side.domain.UserRole;
 import mega.side.domain.Users;
 import mega.side.service.impl.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,9 +74,15 @@ public class AccountController {
 
         session.setAttribute(SessionUtil.SESSION_NAME, userSession);
 
+        String redirectUrl = "";
+        if(UserRole.USER.equals(userSession.getUserRole())) {
+            redirectUrl = "redirect:/index";
+        } else {
+            redirectUrl = "redirect:/vendorSettings";
+        }
         // 4. send redirect
         mv.addObject("user", loginUser);
-        mv.setViewName("redirect:/index");
+        mv.setViewName(redirectUrl);
         return mv;
     }
 
