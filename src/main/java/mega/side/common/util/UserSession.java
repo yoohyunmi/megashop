@@ -1,5 +1,6 @@
 package mega.side.common.util;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import mega.side.domain.Users;
 @Data
 @Getter
 @Setter
-public class UserSession {
+public class UserSession implements Serializable {
 
     private String sessionId;
     private String email;

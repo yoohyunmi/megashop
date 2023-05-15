@@ -72,7 +72,8 @@ public class AccountController {
         System.out.println("session id=" + session.getId());
         UserSession userSession = new UserSession(session.getId(), loginUser);
 
-        session.setAttribute(SessionUtil.SESSION_NAME, userSession);
+//        session.setAttribute(SessionUtil.SESSION_NAME, userSession);
+        SessionUtil.setUserSession(session, userSession);
 
         String redirectUrl = "";
         if(UserRole.USER.equals(userSession.getUserRole())) {

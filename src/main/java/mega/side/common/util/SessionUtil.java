@@ -1,7 +1,9 @@
 package mega.side.common.util;
 
 import javax.servlet.http.HttpSession;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
+@EnableRedisHttpSession
 public class SessionUtil {
 
 	public final static String SESSION_NAME = "userSession";
@@ -12,5 +14,9 @@ public class SessionUtil {
     
 	public static UserSession getUserSession(HttpSession session) {
 		return (UserSession)session.getAttribute(SESSION_NAME);
+	}
+
+	public static void setUserSession(HttpSession session, UserSession userSession) {
+		session.setAttribute(SessionUtil.SESSION_NAME, userSession);
 	}
 }
