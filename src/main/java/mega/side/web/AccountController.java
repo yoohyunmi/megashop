@@ -2,8 +2,8 @@ package mega.side.web;
 
 import mega.side.common.util.Encrypt;
 import mega.side.common.util.SessionUtil;
-import mega.side.common.util.UserSession;
 import mega.side.domain.UserRole;
+import mega.side.domain.UserSession;
 import mega.side.domain.Users;
 import mega.side.service.impl.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,8 +125,8 @@ public class AccountController {
             mv.setViewName("redirect:/account");
             return mv;
          }
-         session.removeAttribute(SessionUtil.SESSION_NAME);
-         session.invalidate();
+         
+         SessionUtil.logoutSession(session);
 
          mv.setViewName("redirect:/account");
          return mv;

@@ -1,12 +1,10 @@
-package mega.side.common.util;
+package mega.side.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import mega.side.domain.UserRole;
-import mega.side.domain.Users;
 
 @Data
 @Getter
