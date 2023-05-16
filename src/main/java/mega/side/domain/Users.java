@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
@@ -49,10 +48,6 @@ public class Users {
     @Column(name="latest_login_ymd")
     private LocalDateTime latestLoginYmd;
 
-    public enum UserRole {
-        ADMIN, USER,
-    }
-
     public void setLatestLoginYmd(LocalDateTime latestLoginYmd) {
         this.latestLoginYmd = latestLoginYmd;
     }
@@ -66,4 +61,17 @@ public class Users {
         this.signYmd = LocalDateTime.now();
         this.role = UserRole.USER;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+    
 }

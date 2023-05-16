@@ -9,6 +9,8 @@ public interface UsersService {
     Users getUser(int id);
 
     void createUser(Users user);
+
+    void updateUser(String email, Users user);
     
     Users loginUser(String email, String password);
 }

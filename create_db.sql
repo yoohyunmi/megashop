@@ -7,7 +7,17 @@ create table users(
   passwd_temporl_yn char,
   passwd_temporl varchar(100),
   sign_ymd timestamp,
-  authorization varchar(10),
+  user_role varchar(10),
   latest_login_ymd timestamp,
   primary key ( id )
 );
+
+create table user_session (
+  session_id varchar(100) not null,
+  email varchar(100) not null,
+  name varchar(50) not null,
+  user_role varchar(10),
+  latest_activity_datetime timestamp,
+  expired_datetime timestamp
+);
+
