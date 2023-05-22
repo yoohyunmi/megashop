@@ -42,6 +42,20 @@ public class AccountController {
         return "redirect:/index";
     }
 
+    @PostMapping("/simpleSignup")
+    public String simpleSignup(HttpServletRequest request, HttpSession session) {
+        String name = request.getParameter("su-name");
+        String email = request.getParameter("su-email");
+        String password = request.getParameter("su-password");
+        String encryptedPassword = Encrypt.encryptSHA256(password);
+
+        Users user = new Users(email, encryptedPassword, name, null);
+        usersService.createUser(user);
+
+        // 원래 있던 화면으로 돌아가기
+        return "redirect:/index";
+    }
+
     @PostMapping("/loginUser")
     public ModelAndView loginUser(@RequestParam("email") String email, @RequestParam("password") String password
                                     , @RequestParam(value="rememberMe", required = false) boolean rememberMe, HttpSession session, HttpServletResponse response) {

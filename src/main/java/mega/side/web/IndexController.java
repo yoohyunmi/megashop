@@ -16,8 +16,7 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
     
     @GetMapping(value = {"/","/index"})
-    public ModelAndView index(Model model, HttpServletRequest request, HttpSession session) {
-        
+    public ModelAndView index(@ModelAttribute("user") Users user, Model model, HttpServletRequest request, HttpSession session) {
         System.out.println("*******************" + session.getAttribute(SessionUtil.SESSION_NAME));
 
         ModelAndView mv = new ModelAndView();
